@@ -43,7 +43,7 @@ $(document).on("click", "#btnSubmit", function (event) {
 
     database.ref().push({
         name: EmployeeName,
-        title: Role,
+        title: roleInput,
         date: StartDate,
         rate: MonthlyRate,
         dateAdded: firebase.database.ServerValue.TIMESTAMP
