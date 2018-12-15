@@ -38,8 +38,8 @@ $(document).on("click", "#btnSubmit", function (event) {
     tableData5.text(MonthlyRate);
     var tableData6 = $("<td>");
 
-    tableRow.append(tableData1, tableData2, tableData3, tableData4, tableData5, tableData6);
-    $(".table").append(tableRow);
+    // tableRow.append(tableData1, tableData2, tableData3, tableData4, tableData5, tableData6);
+    // $(".table").append(tableRow);
 
     database.ref().push({
         name: EmployeeName,
