@@ -1,9 +1,9 @@
-var EmployeeName;
-var Role;
-var StartDate;
-var mounthsWork;
-var MonthlyRate;
-var TotalBilled;
+var EmployeeName = "";
+var Role = "";
+var StartDate = "";
+var mounthsWork = "";
+var MonthlyRate = "";
+var TotalBilled = "";
 
 // We will need this
 // use .push({}) to add and not change database.ref().on("child_added", function(snapshot) {  
@@ -37,6 +37,15 @@ var config = {
     messagingSenderId: "208307836815"
 };
 firebase.initializeApp(config);
+
+// values from text-boxes
+EmployeeName = $("#nameInput").val().trim();
+roleInput = $("#roleInput").val().trim();
+StartDate = $("#startDateInput").val().trim();
+MonthlyRate = $("#monthlyRateInput").val().trim();
+
+
+
 
 $(document).on("click", ".jumbotron", function () {
     tableRow = $("<tr>");
