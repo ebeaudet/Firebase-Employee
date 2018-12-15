@@ -25,6 +25,8 @@ $(document).on("click", "#btnSubmit", function (event) {
     roleInput = $("#roleInput").val().trim();
     StartDate = $("#startDateInput").val().trim();
     MonthlyRate = $("#monthlyRateInput").val().trim();
+    // mounthsWork =$("#")
+    // TotalBilled
 
     var tableRow = $("<tr>");
     var tableData1 = $("<td>");
@@ -38,16 +40,15 @@ $(document).on("click", "#btnSubmit", function (event) {
     tableData5.text(MonthlyRate);
     var tableData6 = $("<td>");
 
-    // tableRow.append(tableData1, tableData2, tableData3, tableData4, tableData5, tableData6);
-    // $(".table").append(tableRow);
-
     database.ref().push({
         name: EmployeeName,
         title: roleInput,
         date: StartDate,
         rate: MonthlyRate,
+        totalMonth: mounthsWork,
+        pay: TotalBilled,
         dateAdded: firebase.database.ServerValue.TIMESTAMP
-    })
+    });
 
 });
 
@@ -59,11 +60,6 @@ database.ref().on("child_added", function (snapshot) {
     console.log(sv.date);
     console.log(sv.rate);
 
-    // $("#nameInput").text(sv.EmployeeName);
-    // $("#roleInput").text(sv.Role);
-    // $("#startDateInput").text(sv.StartDate);
-    // $("#monthlyRateInput").text(sv.MonthlyRate);
-
     var tableRow = $("<tr>");
     var tableData1 = $("<td>");
     tableData1.text(sv.name);
@@ -72,9 +68,11 @@ database.ref().on("child_added", function (snapshot) {
     var tableData3 = $("<td>");
     tableData3.text(sv.date);
     var tableData4 = $("<td>");
+    tableData4.text(sv.totalMonth);
     var tableData5 = $("<td>");
     tableData5.text(sv.rate);
     var tableData6 = $("<td>");
+    tableData6.text(sv.pay);
 
     tableRow.append(tableData1, tableData2, tableData3, tableData4, tableData5, tableData6);
     $(".table").append(tableRow);
@@ -82,15 +80,3 @@ database.ref().on("child_added", function (snapshot) {
     console.log("Errors: " + error);
 
 });
-
-// var tableRow = $("<tr>");
-// var tableData1 = $("<td>");
-// tableData1.text(database.ref().EmployeeName);
-// var tableData2 = $("<td>");
-// tableData2.text(Role);
-// var tableData3 = $("<td>");
-// tableData3.text(StartDate);
-// var tableData4 = $("<td>");
-// var tableData5 = $("<td>");
-// tableData5.text(MonthlyRate);
-// var tableData6 = $("<td>");
