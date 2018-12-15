@@ -38,16 +38,9 @@ var config = {
 };
 firebase.initializeApp(config);
 
-// values from text-boxes
-EmployeeName = $("#nameInput").val().trim();
-roleInput = $("#roleInput").val().trim();
-StartDate = $("#startDateInput").val().trim();
-MonthlyRate = $("#monthlyRateInput").val().trim();
+var database = firebase.database();
 
-
-
-
-$(document).on("click", ".jumbotron", function () {
+$(document).on("click", "#btnSubmit", function () {
     tableRow = $("<tr>");
     tableData1 = $("<td>");
     tableData2 = $("<td>");
@@ -61,4 +54,22 @@ $(document).on("click", ".jumbotron", function () {
     tableRow.append(tableData1, tableData2, tableData3, tableData4, tableData5, tableData6);
     $(tbody).append(tableData);
 
+    // values from text-boxes
+    EmployeeName = $("#nameInput").val().trim();
+    roleInput = $("#roleInput").val().trim();
+    StartDate = $("#startDateInput").val().trim();
+    MonthlyRate = $("#monthlyRateInput").val().trim();
+
+    database.ref().push({
+        name: EmployeeName,
+        title: Role,
+        date: StartDate,
+        rate: MonthlyRate,
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
+    })
+
 });
+
+database.ref().on("child_added", function(snapshot){
+    
+})
