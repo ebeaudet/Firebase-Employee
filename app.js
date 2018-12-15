@@ -5,29 +5,6 @@ var mounthsWork = "";
 var MonthlyRate = "";
 var TotalBilled = "";
 
-// We will need this
-// use .push({}) to add and not change database.ref().on("child_added", function(snapshot) {  
-// Capture Button Click
-// $("#add-user").on("click", function(event) {
-//     event.preventDefault();
-
-//     // Grabbed values from text boxes
-//     name = $("#name-input").val().trim();
-//     email = $("#email-input").val().trim();
-//     age = $("#age-input").val().trim();
-//     comment = $("#comment-input").val().trim();
-
-//     // Code for handling the push
-//     database.ref().push({
-//       name: name,
-//       email: email,
-//       age: age,
-//       comment: comment,
-//       dateAdded: firebase.database.ServerValue.TIMESTAMP
-//     });
-
-//   });
-
 var config = {
     apiKey: "AIzaSyCyOv9lPv3btckAveNO-HRpuIPrTvzi7QM",
     authDomain: "time-sheets-25e21.firebaseapp.com",
@@ -41,24 +18,28 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 $(document).on("click", "#btnSubmit", function () {
+    // values from text-boxes
+    EmployeeName = $("#nameInput").val().trim();
+    roleInput = $("#roleInput").val().trim();
+    StartDate = $("#startDateInput").val().trim();
+    MonthlyRate = $("#monthlyRateInput").val().trim();
+
     tableRow = $("<tr>");
     tableData1 = $("<td>");
+    tableData1.text(EmployeeName);
     tableData2 = $("<td>");
+    tableData2.text(roleInput);
     tableData3 = $("<td>");
+    tableData3.text(StartDate);
     tableData4 = $("<td>");
     tableData5 = $("<td>");
+    tableData5.text(MonthlyRate);
     tableData6 = $("<td>");
     tableRow.text("employer");
     tableData.text("something");
 
     tableRow.append(tableData1, tableData2, tableData3, tableData4, tableData5, tableData6);
     $(tbody).append(tableData);
-
-    // values from text-boxes
-    EmployeeName = $("#nameInput").val().trim();
-    roleInput = $("#roleInput").val().trim();
-    StartDate = $("#startDateInput").val().trim();
-    MonthlyRate = $("#monthlyRateInput").val().trim();
 
     database.ref().push({
         name: EmployeeName,
@@ -71,5 +52,18 @@ $(document).on("click", "#btnSubmit", function () {
 });
 
 database.ref().on("child_added", function(snapshot){
+    var sv = snapshot.val();
+
+    console.log(sv.EmployeeName);
+    console.log(sv.Role);
+    console.log(sv.StartDate);
+    console.log(sv.MonthlyRate);
+
+    $("#nameInput").text(sv.EmployeeName);
+    $("#roleInput").text(sv.Role);
+    $("#startDateInput").text(sv.StartDate);
+    $("#monthlyRateInput").text(sv.MonthlyRate);
+}, function(error){
+    console.log("Errors: " + error);
     
-})
+});
