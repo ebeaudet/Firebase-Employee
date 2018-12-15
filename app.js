@@ -1,7 +1,7 @@
 var EmployeeName = "";
 var Role = "";
 var StartDate = "";
-var mounthsWork = "";
+var monthsWork = "";
 var MonthlyRate = "";
 var TotalBilled = "";
 
@@ -25,7 +25,7 @@ $(document).on("click", "#btnSubmit", function (event) {
     roleInput = $("#roleInput").val().trim();
     StartDate = $("#startDateInput").val().trim();
     MonthlyRate = $("#monthlyRateInput").val().trim();
-    // mounthsWork =$("#")
+    // monthsWork =$("#")
     // TotalBilled
 
     var tableRow = $("<tr>");
@@ -45,7 +45,7 @@ $(document).on("click", "#btnSubmit", function (event) {
         title: roleInput,
         date: StartDate,
         rate: MonthlyRate,
-        totalMonth: mounthsWork,
+        totalMonth: monthsWork,
         pay: TotalBilled,
         dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
@@ -74,9 +74,14 @@ database.ref().on("child_added", function (snapshot) {
     var tableData6 = $("<td>");
     tableData6.text(sv.pay);
 
+    monthsWork = moment.diff(date, 'months');
+    console.log(monthsWork);
+
     tableRow.append(tableData1, tableData2, tableData3, tableData4, tableData5, tableData6);
     $(".table").append(tableRow);
 }, function (error) {
     console.log("Errors: " + error);
 
 });
+
+
