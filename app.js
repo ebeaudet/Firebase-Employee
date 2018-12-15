@@ -17,7 +17,9 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-$(document).on("click", "#btnSubmit", function () {
+$(document).on("click", "#btnSubmit", function (event) {
+
+    event.preventDefault();
     // values from text-boxes
     EmployeeName = $("#nameInput").val().trim();
     roleInput = $("#roleInput").val().trim();
@@ -35,11 +37,9 @@ $(document).on("click", "#btnSubmit", function () {
     tableData5 = $("<td>");
     tableData5.text(MonthlyRate);
     tableData6 = $("<td>");
-    tableRow.text("employer");
-    tableData.text("something");
 
     tableRow.append(tableData1, tableData2, tableData3, tableData4, tableData5, tableData6);
-    $(tbody).append(tableData);
+    $(".table").append(tableRow);
 
     database.ref().push({
         name: EmployeeName,
