@@ -26,20 +26,7 @@ $(document).on("click", "#btnSubmit", function (event) {
     StartDate = $("#startDateInput").val().trim();
     MonthlyRate = $("#monthlyRateInput").val().trim();
 
-    tableRow = $("<tr>");
-    tableData1 = $("<td>");
-    tableData1.text(EmployeeName);
-    tableData2 = $("<td>");
-    tableData2.text(roleInput);
-    tableData3 = $("<td>");
-    tableData3.text(StartDate);
-    tableData4 = $("<td>");
-    tableData5 = $("<td>");
-    tableData5.text(MonthlyRate);
-    tableData6 = $("<td>");
 
-    tableRow.append(tableData1, tableData2, tableData3, tableData4, tableData5, tableData6);
-    $(".table").append(tableRow);
 
     database.ref().push({
         name: EmployeeName,
@@ -59,10 +46,25 @@ database.ref().on("child_added", function(snapshot){
     console.log(sv.StartDate);
     console.log(sv.MonthlyRate);
 
-    $("#nameInput").text(sv.EmployeeName);
-    $("#roleInput").text(sv.Role);
-    $("#startDateInput").text(sv.StartDate);
-    $("#monthlyRateInput").text(sv.MonthlyRate);
+    // $("#nameInput").text(sv.EmployeeName);
+    // $("#roleInput").text(sv.Role);
+    // $("#startDateInput").text(sv.StartDate);
+    // $("#monthlyRateInput").text(sv.MonthlyRate);
+
+    var tableRow = $("<tr>");
+    var tableData1 = $("<td>");
+    tableData1.text(sv.EmployeeName);
+    var tableData2 = $("<td>");
+    tableData2.text(sv.Role);
+    var tableData3 = $("<td>");
+    tableData3.text(sv.StartDate);
+    var tableData4 = $("<td>");
+    var tableData5 = $("<td>");
+    tableData5.text(sv.MonthlyRate);
+    var tableData6 = $("<td>");
+
+    tableRow.append(tableData1, tableData2, tableData3, tableData4, tableData5, tableData6);
+    $(".table").append(tableRow);
 }, function(error){
     console.log("Errors: " + error);
     
